@@ -39,14 +39,24 @@ app.post('/dating/cards', (req, res) => {
     });
 });
 
-app.get('/dating/cards', (req, res) => {
-  Cards.find((err, data) => {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      res.status(200).send(data);
+/**
+ * app.get('/livros', async (req, res) => {
+    try {
+        const livrosResultado = await livros.find();
+        res.status(200).json(livrosResultado)
+    } catch (err) {
+        res.status(500).json(err);
     }
-  });
+})
+ */
+
+app.get('/dating/cards', async (req, res) => {
+  try {
+    const cards = await Cards.find();
+    res.status(200).send(cards);
+  } catch (err) {
+    res.status(500).json(err);
+  }
 });
 
 //Listener
